@@ -2,14 +2,15 @@ import requests  # pip3 install requests
 import config
 import logging
 import sys
+import os
 from datetime import datetime
 from lib.vomsApi import vomsApi
 from lib.comanageDbClient import comanageDbClient
 
-
 def provision(dry_run):
-    logging.basicConfig(filename='diracProvision.log', level=logging.DEBUG,
-                        filemode='w+', format='%(asctime)s - %(message)s')
+    pathname = str(os.path.dirname(os.path.realpath(__file__)))
+    logging.basicConfig(filename=pathname + '/diracProvision.log', level=logging.DEBUG,
+                        filemode='a', format='%(asctime)s - %(message)s')
 
     values_list = []
     row_id = 1
