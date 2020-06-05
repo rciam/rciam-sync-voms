@@ -15,21 +15,27 @@ def provision(dry_run):
     values_list = []
     row_id = 1
     now = datetime.utcnow()
-    for voms in config.voms_config['vomses']:
-        voUsers = dict()
-        vomsapi = vomsApi()
-        voUsers = vomsapi.getUsers(
-            voms['hostname'], voms['port'], voms['vo_name'])
-        for user in voUsers:
-            for role in voUsers[user]['Roles']:
-                values = (row_id, user,
-                          voUsers[user]['issuer'], reformateRoles(role), now)
-                row_id += 1
-                values_list.append(values)
+    dirac_res = requests.get('https://dirac.egi.eu/files/diracVOs.json')
+    vos = dirac_res.json()
+    for vo in vos:
+        for voms in vo['VOMSServers']:
+            voUsers = dict()
+            vomsapi = vomsApi()
+            voUsers = vomsapi.getUsers(voms['HostName'], '8443', vo['VOName'])
+            if voUsers == None:
+                continue
+            for user in voUsers:
+                for role in voUsers[user]['Roles']:
+                    values = (row_id, user,
+                            voUsers[user]['issuer'], reformateRoles(role), now)
+                    row_id += 1
+                    values_list.append(values)
+            break
 
-    print(values_list)
-    comanage = comanageDbClient()
-    comanage.update_local_members(values_list)
+    if values_list != []:
+        logging.debug(values_list)
+        comanage = comanageDbClient()
+        comanage.update_local_members(values_list)
 
 
 def reformateRoles(role):
