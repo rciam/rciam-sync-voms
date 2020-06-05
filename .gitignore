@@ -56,3 +56,6 @@ tags
 
 # Ignore log file
 log/voms-provision.log
+
+# Ignore user's configuration file
+config.py
