@@ -9,8 +9,9 @@ from lib.comanageDbClient import comanageDbClient
 
 def provision(dry_run):
     pathname = str(os.path.dirname(os.path.realpath(__file__)))
-    logging.basicConfig(filename=pathname + '/log/voms-provision.log', level=logging.DEBUG,
-                        filemode='a', format='%(asctime)s - %(message)s')
+    logging.basicConfig(filename=pathname + '/log/main.log',
+                        level=logging.DEBUG, filemode='a',
+                        format='%(asctime)s - %(message)s')
 
     values_list = []
     row_id = 1

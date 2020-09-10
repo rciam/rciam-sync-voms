@@ -1,3 +1,9 @@
+# Ignore log files
+log/*
+
+# Ignore user's configuration file
+config.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -53,9 +59,3 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
-
-# Ignore log file
-log/voms-provision.log
-
-# Ignore user's configuration file
-config.py
