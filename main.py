@@ -1,5 +1,5 @@
-import requests  # pip3 install requests
 import config
+import requests
 import logging
 import sys
 import os
@@ -7,7 +7,7 @@ from datetime import datetime
 from lib.vomsApi import vomsApi
 from lib.comanageDbClient import comanageDbClient
 
-def provision(dry_run):
+def syncVoms(dry_run):
     pathname = str(os.path.dirname(os.path.realpath(__file__)))
     logging.basicConfig(filename=pathname + '/log/main.log',
                         level=logging.DEBUG, filemode='a',
@@ -16,8 +16,8 @@ def provision(dry_run):
     values_list = []
     row_id = 1
     now = datetime.utcnow()
-    dirac_res = requests.get('https://dirac.egi.eu/files/diracVOs.json')
-    vos = dirac_res.json()
+    vomses_res = requests.get(config.voms['vomses_url'])
+    vos = vomses_res.json()
     for vo in vos:
         for voms in vo['VOMSServers']:
             voUsers = dict()
@@ -27,8 +27,8 @@ def provision(dry_run):
                 continue
             for user in voUsers:
                 for role in voUsers[user]['Roles']:
-                    values = (row_id, user,
-                            voUsers[user]['issuer'], reformateRoles(role), now)
+                    values = (row_id, user, voUsers[user]['issuer'],
+                              reformatRoles(role), now)
                     row_id += 1
                     values_list.append(values)
             break
@@ -39,7 +39,7 @@ def provision(dry_run):
         comanage.update_local_members(values_list)
 
 
-def reformateRoles(role):
+def reformatRoles(role):
     newRole = role.replace('/', ':')
     newRole = newRole.replace(':Role=', ':role=')
     return newRole[1:]
@@ -50,4 +50,4 @@ if __name__ == '__main__':
         dry_run_flag = True
     else:
         dry_run_flag = False
-    provision(dry_run_flag)
+    syncVoms(dry_run_flag)

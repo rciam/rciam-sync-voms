@@ -1,7 +1,7 @@
 import requests
 import sys
-import config
 import logging
+import config
 
 
 """ Get all the users of the VOMS VO with their detailed information

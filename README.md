@@ -1,6 +1,6 @@
 # rciam-sync-voms
 
-A Python-based tool for synchronising VOMS VO/group membership and role information from VOMS servers.
+A Python-based tool for synchronising VO/group membership and role information from VOMS servers.
 
 ## Instalation
 
@@ -9,7 +9,7 @@ Install from git and configure
 ```bash
 git clone https://github.com/rciam/rciam-sync-voms.git
 cd rciam-sync-voms
-cp config-example.py config.py
+cp config.py.example config.py
 vi config.py
 ```
 

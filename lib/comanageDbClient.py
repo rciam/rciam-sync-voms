@@ -4,7 +4,6 @@ import urllib.parse
 import requests
 import xml.etree.ElementTree as ET
 import sys
-import configparser as config
 import logging
 import config
 
@@ -12,9 +11,11 @@ import config
 class comanageDbClient:
 
     def update_local_members(self, values_list):
-        #conn = self.initConn()
-        connect_comanage_str = "dbname='" + config.comanage_config['dbname'] + "' user='" + config.comanage_config['user'] + "' host='" + config.comanage_config['host'] + "' password='" + config.comanage_config['password'] + "'"
-        conn = psycopg2.connect(connect_comanage_str)
+        dsn = "dbname='" + config.registry['db']['name'] + \
+            "' user='" + config.registry['db']['user'] + \
+            "' password='" + config.registry['db']['password'] + \
+            "' host='" + config.registry['db']['host'] + "'"
+        conn = psycopg2.connect(dsn)
         with conn:
             sql = """CREATE TEMP TABLE voms_members_fqan_temp (
                     id integer PRIMARY KEY,
@@ -25,11 +26,11 @@ class comanageDbClient:
             with conn.cursor() as curs:
                 curs.execute(sql)
 
-            sql = """INSERT INTO voms_members_fqan_temp (id, subject, issuer, vo_id,
-                    created) VALUES %s"""
+            sql = """INSERT INTO voms_members_fqan_temp (
+                    id, subject, issuer, vo_id, created) VALUES %s"""
             with conn.cursor() as curs:
                 psycopg2.extras.execute_values(curs, sql, values_list,
-                                            page_size=1000)
+                                               page_size=1000)
 
             # Remove duplicate remote membership info
             sql = """DELETE FROM voms_members_fqan_temp
