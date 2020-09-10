@@ -1,21 +1,7 @@
-# apt-get install --no-install-recommends python3-dev python3-pip
-
-# Python 3:
-# sudo apt install libpq-dev python3-dev
-
-# Additional:
-# sudo apt install build-essential
-# or
-# sudo apt install postgresql-server-dev-all
-
-# pip install -U pyopenssl
-
-# apt-get install postfix
-
-import psycopg2  # pip install psycopg2-binary
+import psycopg2
 import psycopg2.extras
 import urllib.parse
-import requests  # pip install requests
+import requests
 import xml.etree.ElementTree as ET
 import sys
 import configparser as config
