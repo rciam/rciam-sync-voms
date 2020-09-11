@@ -24,8 +24,8 @@ class vomsApi:
             try:
                 result = requests.get(url,
                                     headers={"X-VOMS-CSRF-GUARD": "y"},
-                                    cert=(config.voms_config['cert_path'], config.voms_config['key_path']),
-                                    verify=config.voms_config['trusted_ca_path'],
+                                    cert=(config.voms['cert_path'], config.voms['key_path']),
+                                    verify=config.voms['trusted_ca_path'],
                                     params={"startIndex": str(startIndex),
                                             "pageSize": "100"})
             except requests.ConnectionError as exc:

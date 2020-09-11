@@ -1,11 +1,4 @@
 voms = {
-    "vomses": [
-        {
-            "hostname": "voms.example.org",
-            "port": "443",
-            "vo_name": "example-vo"
-        }
-    ],
     "vomses_url": "https://example.org/vomses.json",
     "cert_path": "/var/www/.globus/usercert.pem",
     "key_path": "/var/www/.globus/userkey.pem",
