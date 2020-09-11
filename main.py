@@ -22,7 +22,8 @@ def syncVoms(dry_run):
         for voms in vo['VOMSServers']:
             voUsers = dict()
             vomsapi = vomsApi()
-            voUsers = vomsapi.getUsers(voms['HostName'], '8443', vo['VOName'])
+            voUsers = vomsapi.getUsers(voms['HostName'], voms['Port'],
+                                       vo['VOName'])
             if voUsers == None:
                 continue
             for user in voUsers:
