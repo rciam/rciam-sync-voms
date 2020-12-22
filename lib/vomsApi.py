@@ -50,7 +50,7 @@ class vomsApi:
         # We have got the user info, reformat it
         resultDict = {}
         for user in rawUserList:
-            if user['suspended']:
+            if user.get('suspended'):
                 logging.debug("Ignoring suspended user: %s" % user)
                 continue
             for cert in user['certificates']:
