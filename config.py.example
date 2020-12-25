@@ -1,0 +1,15 @@
+voms = {
+    "vomses_url": "https://example.org/vomses.json",
+    "cert_path": "/var/www/.globus/usercert.pem",
+    "key_path": "/var/www/.globus/userkey.pem",
+    "trusted_ca_path": "/etc/grid-security/certificates/"
+}
+
+registry = {
+    "db": {
+        "name": "registry",
+        "host": "registry.example.org",
+        "user": "registry_admin",
+        "password": "registry_secret"
+    }
+}
