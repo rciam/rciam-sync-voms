@@ -16,7 +16,8 @@ def syncVoms(dry_run):
     values_list = []
     row_id = 1
     now = datetime.utcnow()
-    vomses_res = requests.get(config.voms['vomses_url'], verify=config.voms['trusted_ca_path'])
+    vomses_res = requests.get(config.voms['vomses_url'],
+                              verify=config.voms['trusted_ca_path'])
     vos = vomses_res.json()
     for vo in vos:
         for voms in vo['VOMSServers']:
