@@ -21,3 +21,8 @@ registry = {
         "password": "registry_secret",
     },
 }
+
+logging = {
+    # Logging level: "DEBUG", "INFO", "WARNING, "ERROR", or "CRITICAL"
+    "level": "INFO",
+}

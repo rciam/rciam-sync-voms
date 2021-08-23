@@ -9,8 +9,9 @@ from lib.comanageDbClient import comanageDbClient
 
 def syncVoms(dry_run):
     pathname = str(os.path.dirname(os.path.realpath(__file__)))
+    loglevel = logging.getLevelName(config.logging['level'])
     logging.basicConfig(filename=pathname + '/log/main.log',
-                        level=logging.DEBUG, filemode='a',
+                        level=loglevel, filemode='a',
                         format='%(asctime)s - %(message)s')
 
     values_list = []

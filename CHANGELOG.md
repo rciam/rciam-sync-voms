@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Configuration option for specifying a CA\_BUNDLE file or directory with certificates of trusted CAs for SSL verification of the vomses URL
+- Configuration option for specifying the logging level
 
 ## [v1.0.1] - 2021-07-12
 
