@@ -1,6 +1,7 @@
 import requests
 import sys
 import logging
+logging.captureWarnings(True)
 import config
 
 
