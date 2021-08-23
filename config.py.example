@@ -1,8 +1,16 @@
 voms = {
-    "vomses_url": "https://example.org/vomses.json",
-    "cert_path": "/var/www/.globus/usercert.pem",
-    "key_path": "/var/www/.globus/userkey.pem",
-    "trusted_ca_path": "/etc/grid-security/certificates/"
+    "vomses_file": {
+        "url": "https://example.org/vomses.json",
+        # Uncomment the following line to use the specified CA_BUNDLE file or
+        # directory with certificates of trusted CAs for SSL verification of
+        # the vomses URL
+        #"ca_path": "/etc/grid-security/certificates/",
+    },
+    "api": {
+        "cert_path": "/var/www/.globus/usercert.pem",
+        "key_path": "/var/www/.globus/userkey.pem",
+        "ca_path": "/etc/grid-security/certificates/",
+    },
 }
 
 registry = {
@@ -10,6 +18,6 @@ registry = {
         "name": "registry",
         "host": "registry.example.org",
         "user": "registry_admin",
-        "password": "registry_secret"
-    }
+        "password": "registry_secret",
+    },
 }
