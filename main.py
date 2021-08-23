@@ -9,14 +9,20 @@ from lib.comanageDbClient import comanageDbClient
 
 def syncVoms(dry_run):
     pathname = str(os.path.dirname(os.path.realpath(__file__)))
+    loglevel = logging.getLevelName(config.logging['level'])
     logging.basicConfig(filename=pathname + '/log/main.log',
-                        level=logging.DEBUG, filemode='a',
+                        level=loglevel, filemode='a',
                         format='%(asctime)s - %(message)s')
 
     values_list = []
     row_id = 1
     now = datetime.utcnow()
-    vomses_res = requests.get(config.voms['vomses_url'])
+    if 'ca_path' in config.voms['vomses_file']:
+        vomses_verify = config.voms['vomses_file']['ca_path']
+    else:
+        vomses_verify = True
+    vomses_res = requests.get(config.voms['vomses_file']['url'],
+                              verify=vomses_verify)
     vos = vomses_res.json()
     for vo in vos:
         for voms in vo['VOMSServers']:
